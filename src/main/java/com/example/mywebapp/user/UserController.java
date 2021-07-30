@@ -35,26 +35,26 @@ public class UserController {
                 user.setBalance(user.getBalance()+user.getMoneyForDeposit());
                 user.setMoneyForDeposit(0.0);
                 service.save(user);
-                ra.addFlashAttribute("message","The user deposit successfully.");
+                ra.addFlashAttribute("message","The user (ID: " + user.getId() + ") deposit successfully.");
             }else{
                 user.setMoneyForDeposit(0.0);
                 service.save(user);
-                ra.addFlashAttribute("message","The user deposit failure.");
+                ra.addFlashAttribute("message","The user (ID: " + user.getId() + ") deposit failure.");
             }
         }else if(user.getMoneyForDeposit() == 0.0 && user.getMoneyForWithdraw() != 0.0){
             if(user.getMoneyForWithdraw() <= user.getBalance()){
                 user.setBalance(user.getBalance()-user.getMoneyForWithdraw());
                 user.setMoneyForWithdraw(0.0);
                 service.save(user);
-                ra.addFlashAttribute("message","The user withdraw successfully.");
+                ra.addFlashAttribute("message","The user (ID: " + user.getId() + ") withdraw successfully.");
             }else{
                 user.setMoneyForWithdraw(0.0);
                 service.save(user);
-                ra.addFlashAttribute("message","The user withdraw failure.");
+                ra.addFlashAttribute("message","The user (ID: " + user.getId() + ") withdraw failure.");
             }
         }else{
             service.save(user);
-            ra.addFlashAttribute("message","The user has been saved successfully.");
+            ra.addFlashAttribute("message","The user (ID: " + user.getId() + ") has been saved successfully.");
         }
 
         return "redirect:/users";
