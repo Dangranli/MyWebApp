@@ -2,8 +2,6 @@ package com.example.mywebapp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +22,12 @@ public class UserService {
         }
         throw new UserNotFoundException("Could not find any users with ID " + id);
     }
+//    public void deposit(Integer id) throws UserNotFoundException {
+//        Optional<User> result = repo.findById(id);
+//
+//        if
+//        throw new UserNotFoundException("Could not find any users with ID " + id);
+//    }
     public void delete(Integer id) throws UserNotFoundException {
         Long count = repo.countById(id);
         if(count == null || count == 0){

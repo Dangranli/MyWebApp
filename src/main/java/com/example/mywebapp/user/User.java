@@ -16,6 +16,36 @@ public class User {
     private String firstName;
     @Column(length = 45, nullable = false, name = "last_name")
     private String lastName;
+    @Column(length = 15, nullable = false)
+    private Double balance;
+    @Column(length = 15, nullable = false)
+    private Double moneyForDeposit = 0.0;
+    @Column(length = 15, nullable = false)
+    private Double moneyForWithdraw = 0.0;
+
+    public Double getMoneyForWithdraw() {
+        return moneyForWithdraw;
+    }
+
+    public void setMoneyForWithdraw(Double moneyForWithdraw) {
+        this.moneyForWithdraw = moneyForWithdraw;
+    }
+
+    public Double getMoneyForDeposit() {
+        return moneyForDeposit;
+    }
+
+    public void setMoneyForDeposit(Double moneyForDeposit) {
+        this.moneyForDeposit = moneyForDeposit;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
 
     public Integer getId() {
         return id;
@@ -65,6 +95,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

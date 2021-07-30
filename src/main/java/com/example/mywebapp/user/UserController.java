@@ -30,8 +30,33 @@ public class UserController {
     }
     @PostMapping("/users/save")
     public String saveUser(User user, RedirectAttributes ra){
-        service.save(user);
-        ra.addFlashAttribute("message","The user has been saved successfully.");
+        if(user.getMoneyForDeposit() != 0.0 && user.getMoneyForWithdraw() == 0.0){
+            if(user.getMoneyForDeposit()>5.0 && user.getMoneyForDeposit()<10000.0){
+                user.setBalance(user.getBalance()+user.getMoneyForDeposit());
+                user.setMoneyForDeposit(0.0);
+                service.save(user);
+                ra.addFlashAttribute("message","The user deposit successfully.");
+            }else{
+                user.setMoneyForDeposit(0.0);
+                service.save(user);
+                ra.addFlashAttribute("message","The user deposit failure.");
+            }
+        }else if(user.getMoneyForDeposit() == 0.0 && user.getMoneyForWithdraw() != 0.0){
+            if(user.getMoneyForWithdraw() <= user.getBalance()){
+                user.setBalance(user.getBalance()-user.getMoneyForWithdraw());
+                user.setMoneyForWithdraw(0.0);
+                service.save(user);
+                ra.addFlashAttribute("message","The user withdraw successfully.");
+            }else{
+                user.setMoneyForWithdraw(0.0);
+                service.save(user);
+                ra.addFlashAttribute("message","The user withdraw failure.");
+            }
+        }else{
+            service.save(user);
+            ra.addFlashAttribute("message","The user has been saved successfully.");
+        }
+
         return "redirect:/users";
     }
     @GetMapping("/users/edit/{id}")
@@ -55,5 +80,29 @@ public class UserController {
             ra.addFlashAttribute("message",e.getMessage());
         }
         return "redirect:/users";
+    }
+    @GetMapping("/users/deposit/{id}")
+    public String userDeposit(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
+        try{
+            User user = service.get(id);
+            model.addAttribute("user", user);
+            model.addAttribute("pageTitle", "Deposit Money (ID: " + id + ")");
+            return "user_deposit";
+        } catch (UserNotFoundException e){
+            ra.addFlashAttribute("message",e.getMessage());
+            return "redirect:/users";
+        }
+    }
+    @GetMapping("/users/withdraw/{id}")
+    public String userWithdraw(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
+        try{
+            User user = service.get(id);
+            model.addAttribute("user", user);
+            model.addAttribute("pageTitle", "Withdraw Money (ID: " + id + ")");
+            return "user_withdraw";
+        } catch (UserNotFoundException e){
+            ra.addFlashAttribute("message",e.getMessage());
+            return "redirect:/users";
+        }
     }
 }
