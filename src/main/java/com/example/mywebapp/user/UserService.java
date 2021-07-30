@@ -22,12 +22,7 @@ public class UserService {
         }
         throw new UserNotFoundException("Could not find any users with ID " + id);
     }
-//    public void deposit(Integer id) throws UserNotFoundException {
-//        Optional<User> result = repo.findById(id);
-//
-//        if
-//        throw new UserNotFoundException("Could not find any users with ID " + id);
-//    }
+
     public void delete(Integer id) throws UserNotFoundException {
         Long count = repo.countById(id);
         if(count == null || count == 0){

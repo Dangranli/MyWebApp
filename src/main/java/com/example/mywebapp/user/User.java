@@ -8,20 +8,28 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(nullable = false, unique = true, length = 45)
     private String email;
-    @Column(length = 15, nullable = false)
+
+    @Column(length = 15)
     private String password;
+
     @Column(length = 45, nullable = false, name = "first_name")
     private String firstName;
+
     @Column(length = 45, nullable = false, name = "last_name")
     private String lastName;
-    @Column(length = 15, nullable = false)
-    private Double balance;
-    @Column(length = 15, nullable = false)
+
+    @Column(length = 15)
+    private Double balance = 0.0;
+
+    @Column(length = 15)
     private Double moneyForDeposit = 0.0;
-    @Column(length = 15, nullable = false)
+
+    @Column(length = 15)
     private Double moneyForWithdraw = 0.0;
+
 
     public Double getMoneyForWithdraw() {
         return moneyForWithdraw;
