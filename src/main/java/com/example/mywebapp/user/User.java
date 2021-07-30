@@ -15,11 +15,11 @@ public class User {
     @Column(length = 15)
     private String password;
 
-    @Column(length = 45, nullable = false, name = "first_name")
-    private String firstName;
+    @Column(length = 45, nullable = false, name = "name")
+    private String Name;
 
-    @Column(length = 45, nullable = false, name = "last_name")
-    private String lastName;
+    @Column(length = 15)
+    private String phoneNum;
 
     @Column(length = 15)
     private Double balance = 0.0;
@@ -79,20 +79,20 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return Name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     @Override
@@ -101,8 +101,8 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", Name='" + Name + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
                 ", balance=" + balance +
                 '}';
     }
