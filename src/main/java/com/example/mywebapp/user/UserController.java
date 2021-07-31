@@ -20,7 +20,6 @@ public class UserController {
     public String showUserList(Model model) {
         List<User> listUsers = service.listAll();
         model.addAttribute("listUsers", listUsers);
-
         return "users";
     }
 
@@ -53,7 +52,6 @@ public class UserController {
             ra.addFlashAttribute("message", "The user (ID: " + user.getId() + ") deposit failure.");
         }
         return "redirect:/users";
-
     }
 
     @PostMapping("/users/savewithdraw")
@@ -110,7 +108,7 @@ public class UserController {
     }
 
     @GetMapping("/users/withdraw/{id}")
-    public String userWithdraw(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
+    public String userWithdraw(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
         try {
             User user = service.get(id);
             model.addAttribute("user", user);
@@ -121,4 +119,11 @@ public class UserController {
             return "redirect:/users";
         }
     }
-}
+
+    @GetMapping("/users/userinfo/{id}")
+    public String showOneUser(@PathVariable("id") Integer id, Model model) throws UserNotFoundException {
+            User user = service.get(id);
+            model.addAttribute("user", user);
+            return "user_info";
+        }
+    }

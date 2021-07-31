@@ -2,14 +2,16 @@ package com.example.mywebapp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired private UserRepository repo;
-    public List<User> listAll(){
-        return (List<User>) repo.findAll();
+    public ArrayList<User> listAll(){
+        return (ArrayList<User>) repo.findAll();
     }
 
     public void save(User user) {
